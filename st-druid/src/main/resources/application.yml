@@ -1,0 +1,128 @@
+server:
+  port: 8090
+  servlet:
+    context-path: / #项目发布路径
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/sunlinedb?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+#    username: root
+#    password: root
+#spring:
+#  datasource:
+#    url : jdbc:h2:mem:soa_service_api
+#    username : root
+#    password : root
+#    driverClassName : org.h2.Driver
+#    schema : classpath:schema.sql
+#    data : classpath:data.sql
+#  jpa:
+#    database: H2
+#    show-sql: false
+#    hibernate:
+#      ddl-auto: update
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-confole
+
+
+  #添加视图解析器  html jsp
+#  mvc:         #引入mvn配置
+#    view:
+#      prefix: /WEB-INF/     # /默认代表根目录 src/main/webapp
+#      suffix: .jsp
+#编辑Mybatis配置
+#mybatis:
+#  type-aliases-package: com.sunline.pojo      #定义别名包
+#  mapper-locations: classpath:/mybatis/mappers/*.xml  #加载mapper映射文件
+
+#编辑Mybatis配置
+#mybatis-plus:
+#  type-aliases-package: com.sunline.pojo      #定义别名包
+#  mapper-locations: classpath:/mybatis/mappers/*.xml  #加载mapper映射文件
+#
+#  #开启驼峰映射
+#  configuration:
+#    map-underscore-to-camel-case: true
+#打印Sql
+#logging:
+#  level:
+#    com.sunline.mybatis.mapper: debug
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    schema: classpath:schema.sql #，每次启动程序，程序都会运行schema.sql文件，对数据库的数据操作
+    data: classpath:data.sql #，每次启动程序，程序都会运行data.sql文件，对数据库的数据操作
+    url: jdbc:h2:mem:test #配置h2数据库的连接地址
+    username: sa
+    password: sa
+    initialization-mode: always
+    #H2控制台:http://localhost:8090/h2-console
+    h2:
+      console:
+        enabled: true #开启web console功能
+        path: /h2-console
+
+    # druid配置
+    druid:
+      initial-size: 10   #初连接池启动时的初始值
+      max-active: 10000  #连接池的最大值
+      min-idle: 5 #最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请
+      max-wait: 6000 #最大等待值
+      pool-prepared-statements: false #打开PSCache，并且指定每个连接上PSCache的大小,是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭
+      max-pool-prepared-statement-per-connection-size: 20 #
+      max-open-prepared-statements: 10 #要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+      validation-query: select 1 #用来检测连接是否有效的sql，要求是一个查询语句。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用
+      validation-query-timeout: 1 #
+      test-on-borrow: true #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      test-on-return: true #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      test-while-idle: true #建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+      time-between-eviction-runs-millis: 10000 #有两个含义：1) Destroy线程会检测连接的间隔时间2) testWhileIdle的判断依据，详细看testWhileIdle属性的说明
+      min-evictable-idle-time-millis: 30001 #
+      filters: conn,config,stat,slf4j #属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：监控统计用的filter:stat日志用的filter:log4j防御sql注入的filter:wall
+        # 自定义StatFilter 配置 其他 Filter 不再演示
+#        stat:
+#          db-type: h2
+#          log-slow-sql: true
+#          slow-sql-millis: 2000
+      # 防SQL注入
+      filter:
+        wall:
+          enabled: true
+          db-type: h2
+          config:
+            delete-allow: true
+            drop-table-allow: true
+      # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
+      web-stat-filter:
+        enabled: true #是否启用StatFilter默认值false
+        url-pattern: /druid/* #
+#        exclusions: *
+#          - *.js
+#          - *.gif
+#          - *.jpg
+#          - *.bmp
+#          - *.png
+#          - *.css
+#          - *.ico
+#          - /druid/* #
+        session-stat-enable: true #
+        session-stat-max-count: 1000 #
+#        principal-session-name: #
+#        principal-cookie-name: #
+#        profile-enable: #
+      # StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
+#      stat-view-servlet:
+#        enabled: false #是否启用StatViewServlet（监控页面）默认值为false（考虑到安全问题默认并未启动，如需启用建议设置密码或白名单以保障安全）
+#        url-pattern: #
+#        reset-enable: #
+#        login-username: #
+#        login-password: #
+#        allow: #
+#        deny: #
+      # Spring监控配置，说明请参考Druid Github Wiki，配置_Druid和Spring关联监控配置
+#      aop-patterns: #Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
+      async-close-connection-enable: true
+    type: com.alibaba.druid.pool.DruidDataSource
+
