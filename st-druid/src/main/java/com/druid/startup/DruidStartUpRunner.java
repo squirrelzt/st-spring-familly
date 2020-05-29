@@ -20,7 +20,7 @@ public class DruidStartUpRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("-------------------");
-        log.info(dataSource.toString());
+        log.info("dataSource={}",dataSource.toString());
         Connection connection = dataSource.getConnection();
         log.info(connection.toString());
         connection.close();
