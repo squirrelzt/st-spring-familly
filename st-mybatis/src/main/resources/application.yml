@@ -36,3 +36,9 @@ mybatis-plus:
     db-config:
       id-type: auto
       capital-mode: true
+
+public-field:
+  creator: admin
+  updator: admin1
+  create-version: 1.0.0
+  update-version: 2.0.0
