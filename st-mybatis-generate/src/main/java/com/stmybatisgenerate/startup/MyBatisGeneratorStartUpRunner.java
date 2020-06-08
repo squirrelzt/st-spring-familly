@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-//@Component
+@Component
 @Order(value = 1)
 public class MyBatisGeneratorStartUpRunner implements CommandLineRunner {
     @Override
