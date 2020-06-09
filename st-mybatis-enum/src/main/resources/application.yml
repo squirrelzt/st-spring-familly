@@ -25,5 +25,5 @@ spring:
 
 mybatis:
   configuration:
-    default-enum-type-handler:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
