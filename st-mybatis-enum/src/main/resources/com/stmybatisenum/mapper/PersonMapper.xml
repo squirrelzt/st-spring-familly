@@ -12,7 +12,7 @@
     select * from person
   </select>
 
-  <insert id="insert" parameterType="com.stmybatisenum.model.Person">
+  <insert id="insertOne" parameterType="com.stmybatisenum.model.Person">
     insert into person (id, name, age, gender)
     values (
         #{id},

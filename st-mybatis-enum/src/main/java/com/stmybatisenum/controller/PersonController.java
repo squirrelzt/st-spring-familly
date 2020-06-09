@@ -3,10 +3,7 @@ package com.stmybatisenum.controller;
 import com.stmybatisenum.model.Person;
 import com.stmybatisenum.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,8 +18,18 @@ public class PersonController {
         return personService.query();
     }
 
+    @GetMapping("queryById")
+    public Person query(@RequestParam Integer id) {
+        return personService.queryById(id);
+    }
+
     @PostMapping("insert")
     public int insert(@RequestBody Person person) {
+        return personService.insert(person);
+    }
+
+    @PostMapping("insertOne")
+    public int insertOne(@RequestBody Person person) {
         return personService.insert(person);
     }
 }
