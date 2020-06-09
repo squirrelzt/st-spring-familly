@@ -1,0 +1,29 @@
+server:
+  port: 8090
+  servlet:
+    context-path: / #项目发布路径
+  jpa:
+    database: H2
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop #update
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    schema: classpath:sql/schema.sql #，每次启动程序，程序都会运行schema.sql文件，对数据库的数据操作
+    data: classpath:sql/data.sql #，每次启动程序，程序都会运行data.sql文件，对数据库的数据操作
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1 #配置h2数据库的连接地址
+    username: sa
+    password: sa
+    initialization-mode: always
+    #H2控制台:http://localhost:8090/h2-console
+    h2:
+      console:
+        enabled: true #开启web console功能
+        path: /h2-console
+
+mybatis:
+  configuration:
+    default-enum-type-handler:
+
