@@ -1,0 +1,4 @@
+默认的枚举typehandler是EnumTypeHandler
+EnumOrdinalTypeHandler的ordinal编号从0开始，只适合0、1这样的值存储
+
+复杂的需要自定义

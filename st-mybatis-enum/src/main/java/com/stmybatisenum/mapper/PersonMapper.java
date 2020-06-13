@@ -2,6 +2,7 @@ package com.stmybatisenum.mapper;
 
 import com.stmybatisenum.enums.GenderEnum;
 import com.stmybatisenum.enums.GradeEnum;
+import com.stmybatisenum.enums.HasCarEnum;
 import com.stmybatisenum.enums.ZipCodeEnum;
 import com.stmybatisenum.handler.ZipCodeEnumHandler;
 import com.stmybatisenum.model.Person;
@@ -21,6 +22,7 @@ public interface PersonMapper {
             @Result(column = "name", property = "name", javaType = String.class),
             @Result(column = "age", property = "age", javaType = Integer.class),
             @Result(column = "gender", property = "gender", javaType = GenderEnum.class, typeHandler = EnumTypeHandler.class),
+            @Result(column = "hasCar", property = "has_car", javaType = HasCarEnum.class, typeHandler = EnumOrdinalTypeHandler.class),
             @Result(column = "grade", property = "grade", javaType = GradeEnum.class, typeHandler = EnumOrdinalTypeHandler.class),
             @Result(column = "zipCode", property = "zip_code", javaType = ZipCodeEnum.class, typeHandler = ZipCodeEnumHandler.class)
     })
@@ -31,11 +33,12 @@ public interface PersonMapper {
 
     int insertOne(Person person);
 
-    @Insert("insert into person(id, name, age, gender, grade, zip_code) values (" +
+    @Insert("insert into person(id, name, age, gender, has_car, grade, zip_code) values (" +
             "#{id}," +
             "#{name}," +
             "#{age}," +
             "#{gender}," +
+            "#{hasCar}," +
             "#{grade}," +
             "#{zipCode}" +
             ")")

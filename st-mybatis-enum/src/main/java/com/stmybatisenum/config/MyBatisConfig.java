@@ -1,6 +1,7 @@
 package com.stmybatisenum.config;
 
 import com.stmybatisenum.enums.GradeEnum;
+import com.stmybatisenum.enums.HasCarEnum;
 import com.stmybatisenum.handler.ZipCodeEnumHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.type.EnumOrdinalTypeHandler;
@@ -23,6 +24,7 @@ public class MyBatisConfig {
                 //在这里可以对 configuration 进行多种操作
                 TypeHandlerRegistry registry = configuration.getTypeHandlerRegistry();
                 registry.register(ZipCodeEnumHandler.class);
+                registry.register(HasCarEnum.class, EnumOrdinalTypeHandler.class);
                 registry.register(GradeEnum.class, EnumOrdinalTypeHandler.class);
             }
         };

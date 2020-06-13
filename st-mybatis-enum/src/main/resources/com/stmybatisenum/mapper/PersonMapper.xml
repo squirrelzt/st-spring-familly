@@ -6,6 +6,8 @@
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="AGE" jdbcType="INTEGER" property="age" />
     <result column="GENDER" jdbcType="VARCHAR" property="gender" />
+    <result column="HAS_CAR" jdbcType="VARCHAR" property="hasCar" />
+    <result column="GRADE" jdbcType="VARCHAR" property="grade" />
     <result column="ZIP_CODE" jdbcType="VARCHAR" property="zipCode" />
   </resultMap>
 
@@ -14,12 +16,13 @@
   </select>
 
   <insert id="insertOne" parameterType="com.stmybatisenum.model.Person">
-    insert into person (id, name, age, gender, zip_code)
+    insert into person (id, name, age, gender, has_car, grade, zip_code)
     values (
         #{id},
         #{name},
         #{age},
         #{gender},
+        #{hasCar},
         #{grade},
         #{zipCode}
     )
