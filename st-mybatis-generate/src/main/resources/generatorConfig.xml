@@ -4,14 +4,15 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
+    <!--    <classPathEntry location="./lib/hsqldb-2.5.0.jar"/>-->
     <context id="H2Tables" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin" />
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
 
-        <jdbcConnection driverClass="org.h2.Driver"
-                        connectionURL="jdbc:h2:mem:test"
+        <jdbcConnection driverClass="org.hsqldb.jdbcDriver"
+                        connectionURL="jdbc:hsqldb:mem://localhost/testdb;shutdown=true"
                         userId="sa"
                         password="sa">
         </jdbcConnection>
@@ -34,7 +35,6 @@
         </javaClientGenerator>
 
         <table tableName="school" domainObjectName="School" >
-            <generatedKey column="id" sqlStatement="CALL IDENTITY()" identity="true" />
         </table>
     </context>
 </generatorConfiguration>
