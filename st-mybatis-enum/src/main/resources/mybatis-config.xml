@@ -4,8 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-  <!--测试 configLocation 方式时使用该配置-->
   <typeHandlers>
-    <typeHandler handler="tk.mybatis.enums.springboot.LabelValueTypeHandler"/>
+<!--    <typeHandler handler="com.stmybatisenum.handler.MyEnumOrdinalTypeHandler"/>-->
+    <typeHandler handler="com.stmybatisenum.handler.MyEnumOrdinalTypeHandler"
+                  javaType="com.stmybatisenum.enums.GradeEnum"/>
   </typeHandlers>
 </configuration>

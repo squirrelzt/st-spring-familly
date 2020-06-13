@@ -1,6 +1,7 @@
 package com.stmybatisenum.model;
 
 import com.stmybatisenum.enums.GenderEnum;
+import com.stmybatisenum.enums.GradeEnum;
 import com.stmybatisenum.enums.ZipCodeEnum;
 import lombok.Data;
 
@@ -16,6 +17,8 @@ public class Person implements Serializable {
     private Integer age;
 
     private GenderEnum gender;
+
+    private GradeEnum grade;
 
     private ZipCodeEnum zipCode;
 }

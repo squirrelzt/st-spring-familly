@@ -20,6 +20,7 @@
         #{name},
         #{age},
         #{gender},
+        #{grade},
         #{zipCode}
     )
   </insert>

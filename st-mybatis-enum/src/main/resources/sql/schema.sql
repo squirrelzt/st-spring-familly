@@ -4,6 +4,7 @@ create table person (
     name varchar(255),
     age int not null,
     gender varchar(10) not null,
+    grade varchar(10) not null,
     zip_code int(10),
     primary key (id)
 );
