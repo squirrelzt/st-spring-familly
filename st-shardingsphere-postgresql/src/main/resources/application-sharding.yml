@@ -1,0 +1,64 @@
+sharding:
+  jdbc:
+    datasource:
+      # 数据源
+      names: ds0,ds1,ds2
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://192.168.0.104:5432/postgres
+        username: postgres
+        password: 123456
+      ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://192.168.0.104:5433/postgres
+        username: postgres
+        password: 123456
+      ds2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://192.168.0.104:5434/postgres
+        username: postgres
+        password: 123456
+    config:
+      sharding:
+        # 默认数据源，不分库分表到达这个数据源
+        default-data-source-name: ds0
+        #【默认分库策略】对id取模
+        default-database-strategy:
+          inline:
+            sharding-column: id
+            algorithm-expression: ds$->{id % 2}
+        # 【分表策略】
+        tables:
+          # dictionary是广播表
+#          dictionary:
+#            key-generator-column-name: dictionary_id
+#            actual-data-nodes: ds$->{0..1}.dictionary
+#          # user表只分库不分表
+#          user:
+#            key-generator-column-name: user_id
+#            actual-data-nodes: ds$->{0..1}.user
+          # person表只分库不分表
+          person:
+            key-generator-column-name: id
+            actual-data-nodes: ds$->{0..1}.person
+          # order表分库分表
+#          order:
+#            key-generator-column-name: order_id
+#            actual-data-nodes: ds$->{0..1}.order$->{0..1}
+#            table-strategy:
+#              inline:
+#                sharding-column: order_id
+#                algorithm-expression: order$->{order_id%2}
+#          # order_item表分库分表
+#          order_item:
+#            key-generator-column-name: order_item_id
+#            actual-data-nodes: ds$->{0..1}.order_item$->{0..1}
+#            table-strategy:
+#              inline:
+#                sharding-column: order_id
+#                algorithm-expression: order_item$->{order_id%2}
+      props:
+        sql.show: true

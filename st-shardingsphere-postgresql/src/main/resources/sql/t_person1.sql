@@ -1,0 +1,10 @@
+INSERT INTO public.t_person1 (id, name, age) VALUES ('1', 'zhao', 5);
+INSERT INTO public.t_person1 (id, name, age) VALUES ('2', 'qian', 15);
+INSERT INTO public.t_person1 (id, name, age) VALUES ('3', 'sun', 25);
+INSERT INTO public.t_person1 (id, name, age) VALUES ('4', 'li', 65);
+INSERT INTO public.t_person1 (id, name, age) VALUES ('5', 'zhou', 85);
+INSERT INTO public.t_person1 (id, name, age) VALUES ('6', 'wu', 95);
+INSERT INTO public.t_person1 (id, name, age) VALUES ('7', 'zheng', 15);
+INSERT INTO public.t_person1 (id, name, age) VALUES ('8', 'wang', 25);
+INSERT INTO public.t_person1 (id, name, age) VALUES ('9', 'feng', 45);
+INSERT INTO public.t_person1 (id, name, age) VALUES ('10', 'chen', 35);
