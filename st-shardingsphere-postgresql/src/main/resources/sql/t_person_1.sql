@@ -1,0 +1,10 @@
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('101', 'C', 60);
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('102', 'C++', 40);
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('103', 'Python', 70);
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('104', 'Java', 80);
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('105', 'Golang', 60);
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('106', 'JavaScript', 20);
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('107', 'PHP', 10);
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('108', 'TypeScript', 90);
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('109', 'React', 50);
+INSERT INTO public.t_person_1 (id, name, age) VALUES ('110', 'Vue', 30);

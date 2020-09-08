@@ -1,0 +1,167 @@
+@startuml
+package com.psbc.test.postman {
+    interface T188 {
+
+    }
+    class T188Impl {
+        IPcsBaseServiceInvoker invoke
+        ServiceResponseMsg doInvoke(ServiceRequestMsg data)
+    }
+    T188 <|.. T188Impl
+}
+
+package com.psbc.dmf.service.pcs {
+    interface IPcsBaseServiceInvoker {
+
+    }
+    class PcsBaseServiceInvoker {
+        IOnlineFacade composeFacade
+        ServiceResponseMsg doInvoke(ServiceRequestMsg data)
+        ServiceResponseMsg exceptionProcess(Throwable exception)
+    }
+    IPcsBaseServiceInvoker  <-down-   T188Impl
+    IPcsBaseServiceInvoker <|..PcsBaseServiceInvoker
+}
+
+package com.psbc.mdp.common.core.service.api {
+    interface IOnlineFacade
+    class ComposeFacade {
+        IComposeChainProcess composeChainProces
+        T ServiceResponseMsg process(T data)
+    }
+    IOnlineFacade <-down- PcsBaseServiceInvoker
+    IOnlineFacade <|..ComposeFacade
+
+
+}
+
+package com.psbc.mdp.online.service.api.process {
+    interface IComposeChainProcess {
+        execute()
+        invoke()
+    }
+    abstract class AbstractComposeChainProcess {
+        ServiceResponseMsg execute()
+    }
+    IComposeChainProcess <-down- ComposeFacade
+    IComposeChainProcess <|.. AbstractComposeChainProcess
+
+    class ComposeProcess {
+        IComposeEngine composeEngine
+        ServiceResponseMsg invoke()
+    }
+    AbstractComposeChainProcess <|-- ComposeProcess
+}
+
+package com.psbc.mdp.online.service.api.step {
+    interface IComposeChainStep {
+        preProcess()
+        execute()
+        postProcess()
+        exceptionProcess()
+    }
+    abstract class AbstractComposeChainStep {
+        preProcess()
+        execute()
+        postProcess()
+        exceptionProcess()
+    }
+    IComposeChainStep <|.. AbstractComposeChainStep
+    AbstractComposeChainStep <-down- AbstractComposeChainStep
+    IComposeChainStep <-down- AbstractComposeChainProcess
+    IComposeChainProcess <-down- AbstractComposeChainStep
+}
+
+package com.psbc.mdp.online.service.compose.service {
+    interface IComposeEngine
+    class ComposeEngine {
+        PcsFlowApi pcsFlowApi
+        ServiceResponseMsg doOpsOrchestrationService(ServiceRequestMsg serviceRequestMsg, ComposeServiceRegisterBean composeDefDTO)
+    }
+    IComposeEngine <|.. ComposeEngine
+    IComposeEngine <-down- ComposeProcess
+}
+
+package com.psbc.mdp.onlineflow.engin.api {
+    class PcsFlowApi {
+        FlowHandler flowHandler
+        BaseOutputDTO callStaticFlow(String composeCode,BaseInputDTO input)
+    }
+    PcsFlowApi <-down- ComposeEngine
+}
+
+package com.psbc.mdp.onlineflow.engine.api {
+    class FlowHandler {
+        FlowHelper helper
+        BaseOutputDTO callFlow(String composeCode,BaseInputDTO input)
+        BaseOutputDTO executeFlow(String composeCode,BaseInputDTO input)
+    }
+    FlowHandler <-down- PcsFlowApi
+}
+
+package com.psbc.mdp.onlineflow.engine.runtime {
+    class FlowEngine {
+        ServiceNodeHandler serviceNodeHandler
+        run(FlowTransactionConf conf,FlowContext context,FlowHelper helper)
+        run(FlowNode node,FlowContext context,FlowHelper helper)
+    }
+    FlowEngine <-down- FlowHandler
+}
+
+package com.psbc.mdp.onlineflow.engine.handler {
+    class ServiceNodeHandler {
+        IServiceScheduler invokeProxy
+        handle(FlowServiceNode node,FlowContext context,ServiceNodeMapper mapper)
+        Object atomicServiceInvoker(String atomicCode,BaseInputDTO input)
+    }
+    ServiceNodeHandler <-down- FlowEngine
+}
+
+package com.psbc.mdp.onlineflow.api.api {
+    interface IServiceScheduler
+    class ServiceScheduler {
+        IServiceExecutor localServiceExecutor
+        Object process(BaseInputDTO inputDTO)
+        ServiceResponseMsg routeInvokeService()
+    }
+    IServiceScheduler <|.. ServiceScheduler
+    IServiceScheduler <-down- ServiceNodeHandler
+}
+
+package com.psbc.mdp.common.core.service.api.invoke {
+    interface IServiceExecutor
+}
+
+package com.psbc.mdp.online.service.invoke.executor {
+    class LocalServiceExecutor {
+        ServiceResponseMsg invokeService(ServiceRequestMsg serviceRequestMsg)
+        BaseOutputDTO invokeService(ServiceRequestMsg serviceRequestMsg,IAtomicService atomicService)
+    }
+    IServiceExecutor <|.. LocalServiceExecutor
+    IServiceExecutor <-down- ServiceScheduler
+
+}
+
+package com.psbc.mdp.common.core.service.api.IAtomicService {
+    interface IAtomicService {
+       R doService(T data)
+   }
+   IAtomicService <-down- LocalServiceExecutor
+}
+
+
+package com.psbc.simulation.domain.pbs {
+    class DPBS0101002 {
+        DPBS0101002OutputDTO doService(DPBS0101002InputDTO data)
+    }
+    IAtomicService <|.. DPBS0101002
+    class DPBS0101003 {
+            DPBS0101003OutputDTO doService(DPBS0101003InputDTO data)
+    }
+    IAtomicService <|.. DPBS0101003
+     class DPBS0101004 {
+                DPBS0101004OutputDTO doService(DPBS0101004InputDTO data)
+    }
+    IAtomicService <|.. DPBS0101004
+}
+@enduml

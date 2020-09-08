@@ -1,0 +1,54 @@
+server:
+  port: 8080
+
+spring:
+#  output:
+#    ansi:
+#      enabled: always
+  profiles:
+    active: sharding
+#  datasource:
+#    url: jdbc:postgresql://192.168.0.104:5432/postgres
+#    driver-class-name: org.postgresql.Driver
+#    username: postgres
+#    password: 123456
+  shardingsphere:
+    datasource:
+      names: ds0,ds1,ds2
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://192.168.2.106:5432/ds0
+        username: postgres
+        password: 123456
+      ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://192.168.2.102:5432/ds1
+        username: postgres
+        password: 123456
+      ds2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://192.168.2.102:5432/ds2
+        username: postgres
+        password: 123456
+    rules:
+      sharding:
+        tables:
+
+    sharding:
+      master-slave-rules:
+
+
+mybatis-plus:
+#  mapper-locations: classpath:mapper/*.xml
+#    type-aliases-package: com.gupaoedu.entity
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      capital-mode: true
+
+

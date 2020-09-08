@@ -1,0 +1,10 @@
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('201', 'Spring', 36);
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('202', 'MyBatis', 66);
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('203', 'RocketMQ', 86);
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('204', 'Postgres', 26);
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('205', 'Docker', 96);
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('206', 'Kafka', 6);
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('207', 'Eureka', 56);
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('208', 'feign', 46);
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('209', 'ribbon', 16);
+INSERT INTO public.t_person_2 (id, name, age) VALUES ('210', 'druid', 26);
