@@ -1,16 +1,22 @@
 package com.dubbo;
 
+import com.dubbo.domain.Person;
+import com.dubbo.domain.Response;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.ws.rs.core.Response;
 
 @DubboService(protocol = {"rest"})
 public class SayHelloRestServiceImpl implements ISayHelloRestService {
 
     @Override
-    @ResponseBody
     public Response sayHelloRest() {
-        return Response.ok().entity("springboot dubbo rest protocol").build();
+        Person person = new Person();
+        person.setName("tom");
+        person.setAge(30);
+        person.setGender("man");
+        Response response = new Response();
+        response.setCode("200");
+        response.setMsg("成功");
+        response.setData(person);
+        return response;
     }
 }
