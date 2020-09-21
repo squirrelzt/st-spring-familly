@@ -2,7 +2,7 @@ package com.dubbo;
 
 import org.apache.dubbo.config.annotation.DubboService;
 
-//@DubboService
+@DubboService(protocol = "dubbo")
 public class SayHelloServiceImpl implements ISayHelloService {
 
     @Override
