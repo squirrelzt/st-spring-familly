@@ -16,14 +16,34 @@
 	</parent>
 	<groupId>com</groupId>
 	<artifactId>st-dubbo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${revision}</version>
 	<name>st-dubbo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
+		<revision>0.0.1-SNAPSHOT</revision>
 		<java.version>11</java.version>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com</groupId>
+				<artifactId>dubbo-server-api</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com</groupId>
+				<artifactId>dubbo-server</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com</groupId>
+				<artifactId>dubbo-client</artifactId>
+				<version>${revision}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

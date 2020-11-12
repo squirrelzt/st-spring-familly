@@ -5,7 +5,7 @@
     <parent>
         <artifactId>st-dubbo</artifactId>
         <groupId>com</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,7 +15,7 @@
         <dependency>
             <groupId>com</groupId>
             <artifactId>dubbo-server-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>
